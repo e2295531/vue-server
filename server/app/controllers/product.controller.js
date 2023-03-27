@@ -13,3 +13,21 @@ exports.myFindAll=(req,res)=>{
         })
     })
 }
+
+exports.myCreate=(req,res)=>{
+    if(!req.body.name){
+        res.status(400).send({
+            message: 'the name is mandatory'
+        })
+        return;
+    }
+    Product.create(req.body)
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err =>{
+        res.status(500).send({
+            message:'Could not insert the data'
+        })
+    })
+}
